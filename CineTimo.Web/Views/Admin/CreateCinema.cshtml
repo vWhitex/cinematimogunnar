@@ -1,0 +1,34 @@
+@model CineTimo.Core.Models.Cinema
+@{
+    ViewData["Title"] = "Add Cinema";
+}
+
+<h1 class="display-6 mb-4"><i class="bi bi-plus-circle"></i> Add Cinema</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="CreateCinema">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="City" class="form-label">City</label>
+                <select asp-for="City" class="form-select" required>
+                    <option value="">Select a city...</option>
+                    <option value="Tallinn">Tallinn</option>
+                    <option value="Tartu">Tartu</option>
+                    <option value="Pärnu">Pärnu</option>
+                    <option value="Haapsalu">Haapsalu</option>
+                    <option value="Narva">Narva</option>
+                </select>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-green">
+                    <i class="bi bi-check-circle"></i> Add Cinema
+                </button>
+                <a asp-action="Cinemas" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

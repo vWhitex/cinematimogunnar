@@ -1,0 +1,51 @@
+@model CineTimo.Core.Models.Showtime
+@{
+    ViewData["Title"] = "Add Showtime";
+    var films = ViewBag.Films as List<CineTimo.Core.Models.Film> ?? new List<CineTimo.Core.Models.Film>();
+    var rooms = ViewBag.Rooms as List<CineTimo.Core.Models.Room> ?? new List<CineTimo.Core.Models.Room>();
+}
+
+<h1 class="display-6 mb-4"><i class="bi bi-plus-circle"></i> Add Showtime</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="CreateShowtime">
+            <div class="mb-3">
+                <label asp-for="FilmId" class="form-label">Film</label>
+                <select asp-for="FilmId" class="form-select" required>
+                    <option value="">Select a film...</option>
+                    @foreach (var film in films)
+                    {
+                        <option value="@film.Id">@film.Title</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="RoomId" class="form-label">Room</label>
+                <select asp-for="RoomId" class="form-select" required>
+                    <option value="">Select a room...</option>
+                    @foreach (var room in rooms)
+                    {
+                        <option value="@room.Id">@room.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="StartTime" class="form-label">Start Time</label>
+                <input asp-for="StartTime" type="datetime-local" class="form-control" required />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+                <small class="text-muted">Must be a future date/time</small>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label">Price (€)</label>
+                <input asp-for="Price" type="number" step="0.01" min="0" class="form-control" required />
+            </div>
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-green">
+                    <i class="bi bi-check-circle"></i> Add Showtime
+                </button>
+                <a asp-action="Showtimes" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

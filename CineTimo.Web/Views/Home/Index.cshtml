@@ -1,0 +1,50 @@
+@model List<CineTimo.Core.Models.Film>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h1 class="display-6"><i class="bi bi-film"></i> Now Showing</h1>
+    </div>
+    <div class="col-md-6 text-end">
+        @if (!string.IsNullOrEmpty(ViewBag.SelectedCity))
+        {
+            <span class="badge bg-green">Filtering by: @ViewBag.SelectedCity</span>
+            <a asp-action="Index" class="btn btn-sm btn-outline-secondary ms-2">Clear Filter</a>
+        }
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle"></i> No films available @(!string.IsNullOrEmpty(ViewBag.SelectedCity) ? $"in {ViewBag.SelectedCity}" : "at the moment").
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        @foreach (var film in Model)
+        {
+            <div class="col">
+                <div class="card film-card h-100">
+                    <img src="@film.PosterUrl" class="card-img-top" alt="@film.Title">
+                    <div class="card-body">
+                        <h5 class="card-title">@film.Title</h5>
+                        <p class="card-text text-muted small">@film.Description.Substring(0, Math.Min(80, film.Description.Length))...</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-green">@film.Genre</span>
+                            <small class="text-muted"><i class="bi bi-clock"></i> @film.DurationMinutes min</small>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a asp-action="Details" asp-route-id="@film.Id" class="btn btn-outline-green w-100">
+                            <i class="bi bi-ticket"></i> View Showtimes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

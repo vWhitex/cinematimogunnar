@@ -1,0 +1,51 @@
+@model List<ShowtimeViewModel>
+@{
+    ViewData["Title"] = "Showtimes";
+}
+
+<h1 class="display-6 mb-4"><i class="bi bi-calendar-event"></i> All Showtimes</h1>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        <i class="bi bi-info-circle"></i> No showtimes scheduled at the moment.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-dark-green">
+                <tr>
+                    <th>Film</th>
+                    <th>Cinema</th>
+                    <th>Room</th>
+                    <th>Date & Time</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@item.Film?.Title</strong>
+                            <br>
+                            <small class="text-muted">@item.Film?.Genre</small>
+                        </td>
+                        <td>@item.Cinema?.Name<br><small class="text-muted">@item.Cinema?.City</small></td>
+                        <td>@item.Room?.Name</td>
+                        <td>
+                            @item.Showtime.StartTime.ToString("ddd, MMM d")
+                            <br>
+                            <span class="badge bg-secondary">@item.Showtime.StartTime.ToString("HH:mm")</span>
+                        </td>
+                        <td>
+                            <span class="badge bg-green fs-6">@item.Showtime.Price.ToString("C")</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

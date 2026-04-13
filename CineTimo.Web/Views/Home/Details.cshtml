@@ -1,0 +1,51 @@
+@model CineTimo.Core.Models.Film
+@{
+    ViewData["Title"] = Model.Title;
+    var showtimes = ViewBag.Showtimes as List<CineTimo.Core.Models.Showtime> ?? new List<CineTimo.Core.Models.Showtime>();
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="@Model.PosterUrl" class="img-fluid rounded shadow" alt="@Model.Title">
+    </div>
+    <div class="col-md-8">
+        <h1 class="display-5">@Model.Title</h1>
+        <div class="mb-3">
+            <span class="badge bg-green me-2">@Model.Genre</span>
+            <span class="badge bg-secondary"><i class="bi bi-clock"></i> @Model.DurationMinutes minutes</span>
+        </div>
+        <p class="lead">@Model.Description</p>
+
+        <hr class="my-4">
+
+        <h3><i class="bi bi-clock-history"></i> Upcoming Showtimes</h3>
+        @if (!showtimes.Any())
+        {
+            <p class="text-muted">No upcoming showtimes scheduled.</p>
+        }
+        else
+        {
+            <div class="list-group">
+                @foreach (var showtime in showtimes.OrderBy(s => s.StartTime))
+                {
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>@showtime.StartTime.ToString("dddd, MMMM d")</strong>
+                                <br>
+                                <small class="text-muted">@showtime.StartTime.ToString("HH:mm")</small>
+                            </div>
+                            <div>
+                                <span class="badge bg-green fs-6">@showtime.Price.ToString("C")</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+        <a asp-action="Index" class="btn btn-outline-secondary mt-4">
+            <i class="bi bi-arrow-left"></i> Back to Films
+        </a>
+    </div>
+</div>
