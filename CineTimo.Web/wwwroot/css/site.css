@@ -1,0 +1,114 @@
+:root {
+    --green-primary: #22c55e;
+    --green-dark: #16a34a;
+    --green-light: #4ade80;
+    --dark-bg: #1a1a2e;
+    --dark-green: #0f2922;
+}
+
+body {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.bg-dark-green {
+    background-color: var(--dark-green) !important;
+}
+
+.bg-green {
+    background-color: var(--green-primary) !important;
+}
+
+.text-green {
+    color: var(--green-primary) !important;
+}
+
+.btn-green {
+    background-color: var(--green-primary);
+    border-color: var(--green-primary);
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+    color: white;
+}
+
+.btn-outline-green {
+    color: var(--green-primary);
+    border-color: var(--green-primary);
+}
+
+.btn-outline-green:hover {
+    background-color: var(--green-primary);
+    border-color: var(--green-primary);
+    color: white;
+}
+
+.table-dark-green {
+    background-color: var(--dark-green);
+}
+
+.bg-gradient-green {
+    background: linear-gradient(135deg, var(--green-primary), var(--green-dark));
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.film-card .card-img-top {
+    height: 350px;
+    object-fit: cover;
+}
+
+.sidebar {
+    background-color: var(--dark-green) !important;
+}
+
+.sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white !important;
+}
+
+.sidebar .nav-link.active {
+    background-color: var(--green-primary);
+    color: white !important;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+}
+
+.display-6 {
+    font-weight: 600;
+}
+
+.list-group-item {
+    border-left: 3px solid var(--green-primary);
+}
+
+.badge {
+    font-weight: 500;
+}
